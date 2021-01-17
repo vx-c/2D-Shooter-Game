@@ -1,0 +1,8 @@
+
+Music: "Juhani Junkala [Retro Game Music Pack] Level 1" by Juhani Junkala licensed CC0: https://opengameart.org/content/5-chiptunes-action
+
+UFO Texture: "UFO" by Jull licensed CC0: https://opengameart.org/content/animated-spaceships
+
+Player Ship Texture: "Ships_human" by surt licensed CC0: https://opengameart.org/content/shmup-ships
+
+Alien Ship Textures: "Ships_biomech" by surt licensed CC0: https://opengameart.org/content/shmup-ships 
