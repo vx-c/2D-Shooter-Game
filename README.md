@@ -9,8 +9,8 @@ My first game. A top-down 2D shooter game with its own engine developed in C++ w
 - Press X to use a bomb. This destroys all bullets on the screen. Use this when you think you're going to get hit
 - Press and hold left shift to move slower, this is good for precise movement
 
-# Gameplay
-coming soon
+# Gameplay Video
+[![Watch the video](https://img.youtube.com/vi/1lE7xniMp58/maxresdefault.jpg)](youtube.com/watch?v=1lE7xniMp58)
 
 # Windows Installation
 Download the game.zip file
