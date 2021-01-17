@@ -10,7 +10,7 @@ My first game. A top-down 2D shooter game with its own engine developed in C++ w
 - Press and hold left shift to move slower, this is good for precise movement
 
 # Gameplay Video
-[![Watch the video](https://img.youtube.com/vi/1lE7xniMp58/maxresdefault.jpg)](youtube.com/watch?v=1lE7xniMp58)
+[![Watch the video](https://img.youtube.com/vi/vL6OmMscSuM/maxresdefault.jpg)](https://youtu.be/vL6OmMscSuM)
 
 # Windows Installation
 Download the game.zip file
