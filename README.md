@@ -9,6 +9,6 @@ https://youtu.be/Zs19emf-nwE
 [![Watch the video](https://img.youtube.com/vi/Zs19emf-nwE/maxresdefault.jpg)](https://youtu.be/Zs19emf-nwE)
 
 # Windows Installation
-1. Download the game.zip file
-2. Unzip game.zip
+1. Download the Game.zip file
+2. Unzip Game.zip
 3. Open the folder and run the game.exe file
