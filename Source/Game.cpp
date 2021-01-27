@@ -91,18 +91,18 @@ int main() {
 
 	Background background(backgroundSprite, config::BACKGROUND_SCROLLSPEED, config::WINDOW_RESOLUTION[1]);
 	
-	Setup setup; //start setup
-	setup.LoadEnemies(); // Load enemies and bosses
+	Setup setup; 
+	setup.LoadEnemies();
 
-	EnemyFactory enemyFactory(setup.GetEnemies(), setup.GetBosses()); //enemy factory setup
+	EnemyFactory enemyFactory(setup.GetEnemies(), setup.GetBosses());
 
-	Renderer renderer(window); //renderer setup
+	Renderer renderer(window);
 
-	std::vector<Bullet*> bullets; //vector containing our bullets
+	std::vector<Bullet*> bullets;
 
-	std::vector<Enemy*> enemies; //vector containing our enemies
+	std::vector<Enemy*> enemies;
 
-	std::vector<Boss*> bosses; //vector containing our bosses
+	std::vector<Boss*> bosses;
 
 	sf::Music music;
 	music.openFromFile("music.wav");
@@ -125,8 +125,8 @@ int main() {
 		while (gameState == MainGame) {	//The main game loop
 
 			
-			if (enemyFactory.Remaining() == 0 && enemies.size() == 0 && bosses.size() == 0) { //if all enemies and bosses have been defeated
-				gameState = WinScreen;	//change gameState to WinScreen
+			if (enemyFactory.Remaining() == 0 && enemies.size() == 0 && bosses.size() == 0) { //win condition
+				gameState = WinScreen;
 			}
 
 			if (player.CheckGameOver()) {	//gameover
@@ -150,10 +150,10 @@ int main() {
 
 			
 			//Move objects
-			for (std::size_t i = 0; i < bullets.size(); ++i) { //move bullets
+			for (std::size_t i = 0; i < bullets.size(); ++i) {
 				bullets[i]->Move();
 			}
-			for (std::size_t i = 0; i < enemies.size(); ++i) { //move enemies
+			for (std::size_t i = 0; i < enemies.size(); ++i) {
 				enemies[i]->Move();
 			}
 
@@ -178,21 +178,21 @@ int main() {
 
 
 			//Check collisions
-			for (std::size_t i = 0; i < bullets.size(); ++i) { //check for collisions between bullets and the player
+			for (std::size_t i = 0; i < bullets.size(); ++i) { 
 				collisionManager.CheckCollision(*bullets[i], player);
 			}
-			for (std::size_t i = 0; i < enemies.size(); ++i) { //check for collisions between enemies and the player
+			for (std::size_t i = 0; i < enemies.size(); ++i) { 
 				collisionManager.CheckCollision(*enemies[i], player);
 			}
-			for (std::size_t i = 0; i < bosses.size(); ++i) { //check for collisions between bosses and the player
+			for (std::size_t i = 0; i < bosses.size(); ++i) {
 				collisionManager.CheckCollision(*bosses[i], player);
 			}
-			for (std::size_t i = 0; i < bullets.size(); ++i) { //check for collisions between bullets and enemies
+			for (std::size_t i = 0; i < bullets.size(); ++i) {
 				for (unsigned int ii = 0; ii < enemies.size(); ++ii) {
 					collisionManager.CheckCollision(*bullets[i], *enemies[ii]);
 				}
 			}
-			for (std::size_t i = 0; i < bullets.size(); ++i) { //check for collisions between bullets and the bosses 
+			for (std::size_t i = 0; i < bullets.size(); ++i) {
 				for (unsigned int ii = 0; ii < bosses.size(); ++ii) {
 					collisionManager.CheckCollision(*bullets[i], *bosses[ii]);
 				}
@@ -200,7 +200,7 @@ int main() {
 
 
 			//delete destroyed objects
-			for (std::vector<Bullet*>::iterator it = bullets.begin(); it != bullets.end();) { //delete destroyed bullets
+			for (std::vector<Bullet*>::iterator it = bullets.begin(); it != bullets.end();) {
 				if ((*it)->IsDestroyed()) {
 					delete *it; *it = nullptr;
 					it = bullets.erase(it);
@@ -209,7 +209,7 @@ int main() {
 					it++;
 				}
 			}
-			for (std::vector<Enemy*>::iterator it = enemies.begin(); it != enemies.end();) { //delete destroyed enemies
+			for (std::vector<Enemy*>::iterator it = enemies.begin(); it != enemies.end();) {
 				if ((*it)->IsDestroyed()) {
 					delete *it;
 					*it = nullptr;
@@ -219,7 +219,7 @@ int main() {
 					it++;
 				}
 			}
-			for (std::vector<Boss*>::iterator it = bosses.begin(); it != bosses.end();) { //delete destroyed bosses
+			for (std::vector<Boss*>::iterator it = bosses.begin(); it != bosses.end();) {
 				if ((*it)->Get_isDestroyed()) {
 					delete *it;
 					*it = nullptr;
@@ -247,24 +247,24 @@ int main() {
 			
 
 			//render objects
-			renderer.Render(background.GetRenderDescription()); //render the background
+			renderer.Render(background.GetRenderDescription());
 
-			for (std::size_t i = 0; i < bosses.size(); ++i) { //render bosses
+			for (std::size_t i = 0; i < bosses.size(); ++i) {
 				renderer.Render(bosses[i]->GetRenderDescription());
 			}
 
-			for (std::size_t i = 0; i < enemies.size(); ++i) { //render enemies
+			for (std::size_t i = 0; i < enemies.size(); ++i) {
 				renderer.Render(enemies[i]->GetRenderDescription());
 			}
 
-			renderer.Render(player.GetRenderDescription()); //render player
-			renderer.Render(player.GetHitboxRenderDescription()); //render player hitbox
+			renderer.Render(player.GetRenderDescription()); 
+			renderer.Render(player.GetHitboxRenderDescription());
 
-			for (std::size_t i = 0; i < bullets.size(); ++i) { //render bullets
+			for (std::size_t i = 0; i < bullets.size(); ++i) { 
 				renderer.Render(bullets[i]->GetRenderDescription());
 			}
 
-			renderer.Render(hud.GetRenderDescription()); //render the hud
+			renderer.Render(hud.GetRenderDescription());
 
 
 			window.display(); //update the display
@@ -289,10 +289,10 @@ int main() {
 
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter)) {
 				gameState = MainGame;
-				enemyFactory.ResetTimers();	//reset the enemyFactory's timer
+				enemyFactory.ResetTimers();
 			}
 			
-			window.clear(); //clear the window
+			window.clear();
 
 			background.Update();
 
@@ -300,7 +300,7 @@ int main() {
 			renderer.Render(player.GetRenderDescription());
 			renderer.Render(RenderDescription({ 0,0 }, mainScreenSprite));
 
-			window.display(); //update the display
+			window.display();
 		}
 		
 
@@ -333,25 +333,25 @@ int main() {
 						
 			}
 
-			window.clear(); //clear the window
+			window.clear();
 
 			//Render objects
-			renderer.Render(background.GetRenderDescription()); //render the background
-			for (std::size_t i = 0; i < bosses.size(); ++i) { //render bosses
+			renderer.Render(background.GetRenderDescription());
+			for (std::size_t i = 0; i < bosses.size(); ++i) { 
 				renderer.Render(bosses[i]->GetRenderDescription());
 			}
-			for (std::size_t i = 0; i < enemies.size(); ++i) { //render enemies
+			for (std::size_t i = 0; i < enemies.size(); ++i) { 
 				renderer.Render(enemies[i]->GetRenderDescription());
 			}
-			renderer.Render(player.GetRenderDescription()); //render player
-			renderer.Render(player.GetHitboxRenderDescription()); //render player hitbox
-			for (std::size_t i = 0; i < bullets.size(); ++i) { //render bullets
+			renderer.Render(player.GetRenderDescription()); 
+			renderer.Render(player.GetHitboxRenderDescription()); 
+			for (std::size_t i = 0; i < bullets.size(); ++i) { 
 				renderer.Render(bullets[i]->GetRenderDescription());
 			}
-			renderer.Render(hud.GetRenderDescription()); //render the hud
+			renderer.Render(hud.GetRenderDescription()); 
 			renderer.Render(RenderDescription({ 0,0 }, loseScreenSprite));
 
-			window.display(); //update the display
+			window.display(); 
 		}
 		
 
@@ -374,8 +374,8 @@ int main() {
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter)) {
 				gameState = MainGame;
 				enemyFactory.ResetQueues(setup.GetEnemies(), setup.GetBosses());
-				enemyFactory.ResetTimers();	//reset the enemyFactory's timer
-				player.Reset(); //reset the player
+				enemyFactory.ResetTimers();	
+				player.Reset(); 
 
 				//clear the screen
 				bullets.clear();
@@ -386,22 +386,22 @@ int main() {
 			window.clear(); //clear the window
 
 			//Render objects
-			renderer.Render(background.GetRenderDescription()); //render the background
-			for (std::size_t i = 0; i < bosses.size(); ++i) { //render bosses
+			renderer.Render(background.GetRenderDescription()); 
+			for (std::size_t i = 0; i < bosses.size(); ++i) { 
 				renderer.Render(bosses[i]->GetRenderDescription());
 			}
-			for (std::size_t i = 0; i < enemies.size(); ++i) { //render enemies
+			for (std::size_t i = 0; i < enemies.size(); ++i) { 
 				renderer.Render(enemies[i]->GetRenderDescription());
 			}
-			renderer.Render(player.GetRenderDescription()); //render player
-			renderer.Render(player.GetHitboxRenderDescription()); //render player hitbox
-			for (std::size_t i = 0; i < bullets.size(); ++i) { //render bullets
+			renderer.Render(player.GetRenderDescription()); 
+			renderer.Render(player.GetHitboxRenderDescription()); 
+			for (std::size_t i = 0; i < bullets.size(); ++i) { 
 				renderer.Render(bullets[i]->GetRenderDescription());
 			}
-			renderer.Render(hud.GetRenderDescription()); //render the hud
+			renderer.Render(hud.GetRenderDescription()); /
 			renderer.Render(RenderDescription({ 0,0 }, winScreenSprite));
 
-			window.display(); //update the display
+			window.display(); 
 		}
 	}
 
