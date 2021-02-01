@@ -47,18 +47,18 @@ void Enemy::Move() {
 
 			if (position == path[pointNum].position) { //make sure we're not dividing by zero
 				pointNum++;
-				waitTimer.restart(); //restart the timer
+				waitTimer.restart();
 			}
 			else {
 				sf::Vector2f v = path[pointNum].position - position; //a vector in the correct direction
-				float len = sqrt(v.x * v.x + v.y * v.y); //the length of the vector
-				v = v / len; //the unit vector in the correct direction
-				v = v * moveSpeed * moveTimer.getElapsedTime().asSeconds(); //the final vector
+				float len = sqrt(v.x * v.x + v.y * v.y); 
+				v = v / len; 
+				v = v * moveSpeed * moveTimer.getElapsedTime().asSeconds(); 
 
 				if (sqrt(v.x * v.x + v.y * v.y) >= len) { //if the length of the final vector is greater than or equal to the length of the distance from the position to the next point 
 					position = path[pointNum].position;
-					pointNum++; //increment the point number
-					waitTimer.restart(); //restart the timer
+					pointNum++; 
+					waitTimer.restart(); 
 				}
 
 				else {

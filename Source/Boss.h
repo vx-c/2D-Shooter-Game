@@ -37,7 +37,7 @@ public:
 
 
 private:
-	sf::Vector2f position; //The enemy's position
+	sf::Vector2f position;
 
 	bool isDestroyed;
 

@@ -164,7 +164,7 @@ int main() {
 			//Create objects
 			enemyFactory.MakeEnemies(enemies);
 			enemyFactory.MakeBosses(bosses);
-			player.Shoot(bullets); //player shoots if pressing Z
+			player.Shoot(bullets);
 			for (std::size_t i = 0; i < enemies.size(); ++i) {
 				enemies[i]->Shoot(bullets, { player.GetHitbox().x, player.GetHitbox().y });
 			}
@@ -174,7 +174,7 @@ int main() {
 
 
 			//bomb
-			player.Bomb(bullets); //the player bombs if pressing X
+			player.Bomb(bullets);
 
 
 			//Check collisions

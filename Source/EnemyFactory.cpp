@@ -21,7 +21,7 @@ void EnemyFactory::MakeEnemies(std::vector<Enemy*> &enemies) {
 
 	if (enemyQueue.size() != 0) {
 		
-		std::vector<Enemy>::iterator it = enemyQueue.begin(); //iterator
+		std::vector<Enemy>::iterator it = enemyQueue.begin(); 
 
 		if (enemyQueue[0].Get_enterTime() < creationTimer.getElapsedTime().asSeconds()) { //add each enemy that is ready to the enemies vector and delete them from the list
 			
@@ -37,7 +37,7 @@ void EnemyFactory::MakeBosses(std::vector<Boss*> &bosses) {
 	
 	if (bossQueue.size() != 0) {
 
-		std::vector<Boss>::iterator it = bossQueue.begin(); //iterator
+		std::vector<Boss>::iterator it = bossQueue.begin(); 
 
 		if (bossQueue[0].Get_enterTime() < creationTimer.getElapsedTime().asSeconds()) { //add each enemy that is ready to the enemies vector and delete them from the list
 

@@ -61,6 +61,6 @@ private:
 	float enterTime;
 	float exitTime;
 
-	int hp; //enemies life total
+	int hp; 
 };
 

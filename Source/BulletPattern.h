@@ -35,8 +35,6 @@ private:
 
 	std::vector<Bullet> GetTargettingBullets(sf::Vector2f initialPosition, sf::Vector2f playerPosition);
 
-//	std::vector<BulletDescription> GetRotatingBullets(sf::Vector2f initialPosition);
-
 	int type; //type of bullet pattern
 
 	int damage;

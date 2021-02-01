@@ -10,7 +10,7 @@ CollisionManager::CollisionManager()
 void CollisionManager::CheckCollision(Bullet &bullet, Player &player) {
 	
 	if (bullet.IsFriendly()) { //no collision with friendly bullets
-		return; //there is no collision
+		return; 
 	}
 
 	else if (bullet.GetHitbox().CheckIntersects(player.GetHitbox())) {
@@ -22,7 +22,7 @@ void CollisionManager::CheckCollision(Bullet &bullet, Player &player) {
 void CollisionManager::CheckCollision(Bullet &bullet, Enemy &enemy) {
 
 	if (not (bullet.IsFriendly())) { //no collision with non friendly bullets
-		return; //there is no collision
+		return; 
 	}
 	
 	else if (bullet.GetHitbox().CheckIntersects(enemy.GetHitbox().left, enemy.GetHitbox().top, enemy.GetHitbox().width, enemy.GetHitbox().height)) {
@@ -46,7 +46,7 @@ void CollisionManager::CheckCollision(Boss &boss, Player &player) {
 
 void CollisionManager::CheckCollision(Bullet &bullet, Boss &boss) {
 	if (not (bullet.IsFriendly())) { //no collision with non friendly bullets
-		return; //there is no collision
+		return; 
 	}
 
 	else if (bullet.GetHitbox().CheckIntersects(boss.GetHitbox().left, boss.GetHitbox().top, boss.GetHitbox().width, boss.GetHitbox().height)) {

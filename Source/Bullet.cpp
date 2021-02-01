@@ -8,9 +8,7 @@
 Bullet::Bullet(MySprite sprite, sf::Vector2f position, sf::Vector2f velocity, sf::Vector2f acceleration, int damage)
 	: sprite{ sprite }, position{ position }, velocity{ velocity }, acceleration{ acceleration }, damage{ damage }
 {
-
-	moveTimer.restart(); //start the movetimer
-
+	moveTimer.restart();
 }
 
 
@@ -21,13 +19,13 @@ Bullet::~Bullet()
 
 
 void Bullet::Move() {
-	float timeElapsed = moveTimer.getElapsedTime().asSeconds(); //get the time passed from the move timer
+	float timeElapsed = moveTimer.getElapsedTime().asSeconds();
 
-	position += velocity * timeElapsed + 0.5f * acceleration * timeElapsed * timeElapsed; //add the displacement to the position
+	position += velocity * timeElapsed + 0.5f * acceleration * timeElapsed * timeElapsed;
 
-	velocity += acceleration * timeElapsed; //update the velocity
+	velocity += acceleration * timeElapsed
 
-	moveTimer.restart(); //reset the move timer
+	moveTimer.restart();
 
 }
 
@@ -66,6 +64,6 @@ bool Bullet::IsFriendly() const {
 	}
 }
 
-void Bullet::ResetTimers() { //restart the bullet timers so copies will work, , i know this is probably not the best way to do this
+void Bullet::ResetTimers() {
 	moveTimer.restart();
 }

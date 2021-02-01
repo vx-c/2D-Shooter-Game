@@ -35,7 +35,7 @@ public:
 
 	RenderDescription GetHitboxRenderDescription() const;
 
-	CircleHitbox GetHitbox() const; //this needs to be changed to a circle hitbox at some point
+	CircleHitbox GetHitbox() const;
 
 	void Collide();
 

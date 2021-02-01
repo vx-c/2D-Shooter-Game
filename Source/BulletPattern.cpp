@@ -55,14 +55,14 @@ std::vector<Bullet> BulletPattern::GetBullets(sf::Vector2f initialPosition, sf::
 						++currentSet;
 						fireRateTimer.restart();
 						list = GetTargettingBullets(initialPosition, playerPosition);
-						RotateBy(rotation); //rotate the pattern
+						RotateBy(rotation);
 						return list;
 
 					case patternType::simple:
 						++currentSet;
 						fireRateTimer.restart();
 						list = GetSimpleBullets(initialPosition);
-						RotateBy(rotation); //rotate the pattern
+						RotateBy(rotation);
 						return list;
 
 
@@ -73,7 +73,7 @@ std::vector<Bullet> BulletPattern::GetBullets(sf::Vector2f initialPosition, sf::
 				else {
 					cooldownTimer.restart();
 					currentSet = 1;
-					UndoRotations(); //undo any rotations
+					UndoRotations();
 				}
 			}
 		}
@@ -89,14 +89,14 @@ std::vector<Bullet> BulletPattern::GetBullets(sf::Vector2f initialPosition, sf::
 					++currentSet;
 					fireRateTimer.restart();
 					list = GetTargettingBullets(initialPosition, playerPosition);
-					RotateBy(rotation); //rotate the pattern
+					RotateBy(rotation);
 					return list;
 
 				case patternType::simple:
 					++currentSet;
 					fireRateTimer.restart();
 					list = GetSimpleBullets(initialPosition);
-					RotateBy(rotation); //rotate the pattern
+					RotateBy(rotation);
 					return list;
 
 
@@ -123,17 +123,17 @@ std::vector<Bullet> BulletPattern::GetTargettingBullets(sf::Vector2f initialPosi
 	
 	std::vector<Bullet> list;
 
-	std::vector<sf::Vector2f> positions; //list of positions
-	std::vector<sf::Vector2f> velocities; //list of velocities
-	std::vector<sf::Vector2f> accelerations; //list of accelerations
+	std::vector<sf::Vector2f> positions;
+	std::vector<sf::Vector2f> velocities;
+	std::vector<sf::Vector2f> accelerations;
 
 	float playerAngle; //is added to the base angle to account for player position
 
 	sf::Vector2f vecToPlayer = playerPosition - initialPosition;
 
-	float dotProduct = vecToPlayer.x * 1 + vecToPlayer.y * 0; // dot product of the vector from the initial position to the player and the direction vector for 0 degrees
+	float dotProduct = vecToPlayer.x * 1 + vecToPlayer.y * 0;
 
-	if (dotProduct != 0) { //confirm dot product isn't 0
+	if (dotProduct != 0) {
 
 		float cosine = dotProduct / sqrt(vecToPlayer.x * vecToPlayer.x + vecToPlayer.y * vecToPlayer.y); //get the cosine of the angle between the player vector and the 0 degrees direction vector
 
@@ -146,60 +146,59 @@ std::vector<Bullet> BulletPattern::GetTargettingBullets(sf::Vector2f initialPosi
 
 	}
 
-	else { //if the dot product is 0
+	else {
 
 		playerAngle = 0; //baseAngle is already targeting the player
 	}
 
 	for (std::size_t i = 0; i < baseAngles.size(); ++i) { //get the positions
 
-		float radians = baseAngles[i] * config::PI / 180; //convert the angle to radians
-		radians = radians + playerAngle; //adjust the angle with the playerAngle
+		float radians = baseAngles[i] * config::PI / 180;
+		radians = radians + playerAngle;
 
-		float cosine = cosf(radians); //get the cosine of the angle
-		float sine = sinf(radians); //get the sine of the angle
+		float cosine = cosf(radians);
+		float sine = sinf(radians);
 
-		sf::Vector2f distance = { cosine, -sine }; //create a unit vector in the direction of the angle, sine is negative because of they way positions are mapped ont he window
+		sf::Vector2f distance = { cosine, -sine }; //create a unit vector in the direction of the angle, sine is negative because of they way positions are mapped on the window
 
-		distance = distance * baseDistances[i]; //multiply it by the distance multiplier
+		distance = distance * baseDistances[i];
 
-		positions.push_back(initialPosition + distance); //add the distance vector to the initial position to get the position and add it to the positions list
+		positions.push_back(initialPosition + distance);
 	}
 
 	for (std::size_t i = 0; i < velocityAngles.size(); ++i) { //get the velocities
 
-		float angle = velocityAngles[i] + baseAngles[i]; //angle of the bullets velocity
+		float angle = velocityAngles[i] + baseAngles[i];
 
-		float radians = angle * config::PI / 180; //convert the angle to radians
-		radians = radians + playerAngle; //adjust the angle with the playerAngle
+		float radians = angle * config::PI / 180; 
+		radians = radians + playerAngle; 
 
-		float cosine = cosf(radians); //get the cosine of the angle
-		float sine = sinf(radians); //get the sine of the angle
+		float cosine = cosf(radians); 
+		float sine = sinf(radians); 
 
-		sf::Vector2f velocity = { cosine, -sine }; //create a unit vector in the direction of the angle, sine is flipped due to how positions are mapped ont he window
+		sf::Vector2f velocity = { cosine, -sine }; 
 
-		velocities.push_back(velocity * velocitySpeeds[i]); //multiply it by the distance multiplier and add it to the velocities list
+		velocities.push_back(velocity * velocitySpeeds[i]); 
 
 	}
 
 	for (std::size_t i = 0; i < accelerationAngles.size(); ++i) {
 
-		float angle = accelerationAngles[i] + baseAngles[i]; //angle the bullet is accelerating
+		float angle = accelerationAngles[i] + baseAngles[i]; 
 
-		float radians = baseAngles[i] * config::PI / 180; //convert the angle to radians
-		radians = radians + playerAngle; //adjust the angle with the playerAngle
+		float radians = baseAngles[i] * config::PI / 180;
+		radians = radians + playerAngle; 
 
-		float cosine = cosf(radians); //get the cosine of the angle
-		float sine = sinf(radians); //get the sine of the angle
+		float cosine = cosf(radians); 
+		float sine = sinf(radians); 
 
-		sf::Vector2f acceleration = { cosine, -sine }; //create a unit vector in the direction of the angle, sine is flipped due to how positions are mapped ont he window
+		sf::Vector2f acceleration = { cosine, -sine };
 
-		accelerations.push_back(acceleration * accelerationSpeeds[i]); //multiply it by the distance multiplier and add it to the accelerations list
+		accelerations.push_back(acceleration * accelerationSpeeds[i]); 
 	}
 
-	for (std::size_t i = 0; i < baseAngles.size(); ++i) { //create the bulletDescriptions in the list
+	for (std::size_t i = 0; i < baseAngles.size(); ++i) {
 		list.push_back(Bullet(sprite, positions[i], velocities[i], accelerations[i], damage));
-
 	}
 
 	return list;
@@ -209,52 +208,51 @@ std::vector<Bullet> BulletPattern::GetSimpleBullets(sf::Vector2f initialPosition
 
 	std::vector<Bullet> list;
 
-	std::vector<sf::Vector2f> positions; //list of positions
-	std::vector<sf::Vector2f> velocities; //list of velocities
-	std::vector<sf::Vector2f> accelerations; //list of accelerations
+	std::vector<sf::Vector2f> positions;
+	std::vector<sf::Vector2f> velocities;
+	std::vector<sf::Vector2f> accelerations;
 
-	for (std::size_t i = 0; i < baseAngles.size(); ++i) { //get the positions
+	for (std::size_t i = 0; i < baseAngles.size(); ++i) {
 
-		float radians = baseAngles[i] * config::PI / 180; //convert the angle to radians
+		float radians = baseAngles[i] * config::PI / 180;
 
+		float cosine = cosf(radians);
+		float sine = sinf(radians);
 
-		float cosine = cosf(radians); //get the cosine of the angle
-		float sine = sinf(radians); //get the sine of the angle
+		sf::Vector2f distance = { cosine, -sine };
 
-		sf::Vector2f distance = { cosine, -sine }; //create a unit vector in the direction of the angle, sine is negative because of they way positions are mapped ont he window
+		distance = distance * baseDistances[i];
 
-		distance = distance * baseDistances[i]; //multiply it by the distance multiplier
-
-		positions.push_back(initialPosition + distance); //add the distance vector to the initial position to get the position and add it to the positions list
+		positions.push_back(initialPosition + distance);
 	}
 
-	for (std::size_t i = 0; i < velocityAngles.size(); ++i) { //get the velocities
+	for (std::size_t i = 0; i < velocityAngles.size(); ++i) {
 
-		float angle = velocityAngles[i] + baseAngles[i]; //angle of the bullets velocity
+		float angle = velocityAngles[i] + baseAngles[i];
 
-		float radians = angle * config::PI / 180; //convert the angle to radians
+		float radians = angle * config::PI / 180; 
 
-		float cosine = cosf(radians); //get the cosine of the angle
-		float sine = sinf(radians); //get the sine of the angle
+		float cosine = cosf(radians); 
+		float sine = sinf(radians); 
 
-		sf::Vector2f velocity = { cosine, -sine }; //create a unit vector in the direction of the angle, sine is flipped due to how positions are mapped ont he window
+		sf::Vector2f velocity = { cosine, -sine }; 
 
-		velocities.push_back(velocity * velocitySpeeds[i]); //multiply it by the distance multiplier and add it to the velocities list
+		velocities.push_back(velocity * velocitySpeeds[i]); 
 
 	}
 
 	for (std::size_t i = 0; i < accelerationAngles.size(); ++i) {
 
-		float angle = accelerationAngles[i] + baseAngles[i]; //angle the bullet is accelerating
+		float angle = accelerationAngles[i] + baseAngles[i]; 
 
-		float radians = baseAngles[i] * config::PI / 180; //convert the angle to radians
+		float radians = baseAngles[i] * config::PI / 180; 
 
-		float cosine = cosf(radians); //get the cosine of the angle
-		float sine = sinf(radians); //get the sine of the angle
+		float cosine = cosf(radians); 
+		float sine = sinf(radians); 
 
-		sf::Vector2f acceleration = { cosine, -sine }; //create a unit vector in the direction of the angle, sine is flipped due to how positions are mapped ont he window
+		sf::Vector2f acceleration = { cosine, -sine }; 
 
-		accelerations.push_back(acceleration * accelerationSpeeds[i]); //multiply it by the distance multiplier and add it to the accelerations list
+		accelerations.push_back(acceleration * accelerationSpeeds[i]); 
 	}
 
 	for (std::size_t i = 0; i < baseAngles.size(); ++i) { //create the bulletDescriptions in the list

@@ -16,7 +16,7 @@ Player::Player(MySprite &mySprite, sf::Sprite &new_hitbox, sf::Vector2f new_posi
 
 	hitbox = &new_hitbox;
 
-	moveTimer.restart(); //start the move timer}
+	moveTimer.restart();
 }
 
 Player::~Player()
@@ -153,7 +153,7 @@ void Player::Shoot(std::vector<Bullet*> &bullets) { //The player creates and add
 }
 
 
-CircleHitbox Player::GetHitbox() const { //this needs to be changed to a circle hitbox at some point
+CircleHitbox Player::GetHitbox() const { 
 	CircleHitbox circ(position.x + (mySprite->GetWidth() / 2) , position.y + (mySprite->GetHeight() / 2), (hitbox->getTextureRect().width / 2));
 	return circ;
 }
@@ -202,7 +202,7 @@ void Player::Bomb(std::vector<Bullet*> &bullets) {
 			}
 		}
 		
-		bombs--; //reduce the number of bombs by one
+		bombs--; 
 		
 		iTime = config::PLAYER_INVULNERABLE_TIME_AFTER_BOMB; //make the player invulnerable
 		iTimer.restart();
@@ -217,6 +217,6 @@ void Player::Reset() {
 
 	position = config::PLAYER_INITIAL_POSITION;
 
-	moveTimer.restart(); //start the move timer}
+	moveTimer.restart(); 
 }
 

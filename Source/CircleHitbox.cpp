@@ -11,8 +11,8 @@ CircleHitbox::CircleHitbox(float x, float y, float radius)
 
 bool CircleHitbox::CheckIntersects(CircleHitbox &&circle) const {
 	float len = sqrt((circle.x - x)*(circle.x - x) + (circle.y - y)*(circle.y - y)); //calculate the length of the distance between the circles centers
-	if (len < radius + circle.radius) { return true; } //if the circles intersect
-	else { return false; } //if the circles don't intersect
+	if (len < radius + circle.radius) { return true; } 
+	else { return false; } 
 }
 
 bool CircleHitbox::CheckIntersects(float left, float top, float width, float height) const {

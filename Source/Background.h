@@ -24,9 +24,9 @@ private:
 
 	float windowYResolution;
 
-	int length; //the length of the background
+	int length;
 
-	sf::Clock moveTimer; //timer for the movement of the background
+	sf::Clock moveTimer;
 	sf::Sprite *sprite;
 };
 

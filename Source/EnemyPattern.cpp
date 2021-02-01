@@ -19,7 +19,7 @@ std::vector<Enemy> EnemyPattern::GetEnemies() {
 
 	for (int i = 0; i < spawnNumber; ++i) {
 		enemy.Set_enterTime(enemy.Get_enterTime() + spawnRate); //add the spawnRate to the enemies entertime
-		list.push_back(enemy);	//add the enemy to the list
+		list.push_back(enemy);	
 	}
 
 	

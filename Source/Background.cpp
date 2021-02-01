@@ -31,7 +31,7 @@ void Background::Move() {
 	
 	position = position + speed * moveTimer.getElapsedTime().asSeconds(); //move the background based on its speed and the time passed
 
-	moveTimer.restart(); //reset the timer
+	moveTimer.restart();
 
 }
 

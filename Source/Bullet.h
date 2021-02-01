@@ -25,7 +25,7 @@ public:
 
 	bool IsFriendly() const;
 
-	void ResetTimers(); //reset the bullet timers
+	void ResetTimers();
 
 private:
 	sf::Vector2f position;

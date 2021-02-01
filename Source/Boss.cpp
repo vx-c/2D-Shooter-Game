@@ -6,9 +6,9 @@ Boss::Boss(MySprite &sprite, std::vector<BossPhase> phases, float enterTime)
 	: sprite{ sprite }, phases{ phases }, enterTime{ enterTime }
 {
 
-	phase = 0; //start at phase 0
+	phase = 0;
 	pointNum = 0;
-	position = phases[phase].path[0].position; //initial position
+	position = phases[phase].path[0].position;
 
 	isDestroyed = false;
 
@@ -21,9 +21,9 @@ Boss::Boss(const Boss &boss2 )
 	: sprite{ boss2.sprite }, phases{ boss2.phases }, enterTime{ boss2.enterTime }
 {
 
-	phase = 0; //start at phase 0
+	phase = 0;
 	pointNum = 0;
-	position = phases[phase].path[0].position; //initial position
+	position = phases[phase].path[0].position;
 
 	isDestroyed = false;
 
@@ -45,22 +45,22 @@ void Boss::Move() {
 
 			if (position == phases[phase].path[pointNum].position) { //make sure we're not dividing by zero
 				pointNum++;
-				waitTimer.restart(); //restart the timer
+				waitTimer.restart();
 			}
 			else {
-				sf::Vector2f v = phases[phase].path[pointNum].position - position; //a vector in the correct direction
-				float len = sqrt(v.x * v.x + v.y * v.y); //the length of the vector
-				v = v / len; //the unit vector in the correct direction
-				v = v * phases[phase].moveSpeed * moveTimer.getElapsedTime().asSeconds(); //the final vector
+				sf::Vector2f v = phases[phase].path[pointNum].position - position;
+				float len = sqrt(v.x * v.x + v.y * v.y);
+				v = v / len;
+				v = v * phases[phase].moveSpeed * moveTimer.getElapsedTime().asSeconds();
 
-				if (sqrt(v.x * v.x + v.y * v.y) >= len) { //if the length of the final vector is greater than or equal to the length of the distance from the position to the next point 
+				if (sqrt(v.x * v.x + v.y * v.y) >= len) {
 					position = phases[phase].path[pointNum].position;
-					pointNum++; //increment the point number
-					waitTimer.restart(); //restart the timer
+					pointNum++;
+					waitTimer.restart();
 				}
 
 				else {
-					position += v; //add the vector to the current position
+					position += v;
 				}
 			}
 		}
